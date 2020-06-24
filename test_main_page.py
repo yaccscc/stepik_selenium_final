@@ -6,7 +6,7 @@ from .pages.main_page import MainPage
 from .pages.login_page import LoginPage
 
 
-def test_quest_should_see_login_link(browser: Union[webdriver.Chrome, webdriver.Firefox]):
+def test_guest_should_see_login_link(browser: Union[webdriver.Chrome, webdriver.Firefox]):
     page = MainPage("http://selenium1py.pythonanywhere.com/", browser)
     page.open()
     page.should_be_login_link()
