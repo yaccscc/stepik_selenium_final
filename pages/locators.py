@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 
 class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    BASKET_LINK = (By.CSS_SELECTOR, ".basket-mini .btn-group a.btn")
 
 
 class MainPageLocators:
@@ -20,3 +21,8 @@ class ProductPageLocators:
     BASKET_COST = (By.CSS_SELECTOR, "#messages .alert:last-child strong")
     PRODUCT_COST = (By.CSS_SELECTOR, ".product_main .price_color")
     PRODUCT_NAME = (By.CSS_SELECTOR, ".product_main h1")
+
+
+class BasketPageLocators:
+    EMPTY_MESSAGE = (By.CSS_SELECTOR, "#content_inner > p")
+    BASKET_ITEMS = (By.CSS_SELECTOR, ".basket_summary > .basket-items")
