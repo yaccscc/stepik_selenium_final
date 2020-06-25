@@ -90,10 +90,8 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser: Unio
 class TestUserAddToBasketFromProductPage:
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser: Union[webdriver.Chrome, webdriver.Firefox]):
-        main_page = MainPage("http://selenium1py.pythonanywhere.com/", browser)
-        main_page.open()
-        main_page.go_to_login_page()
-        login_page = LoginPage(browser.current_url, browser)
+        login_page = LoginPage("http://selenium1py.pythonanywhere.com/accounts/login/", browser)
+        login_page.open()
         login_page.register_new_user(str(time.time()) + "@yaccscc.ru", "stepikstepik")
         login_page.should_be_authorized_user()
 
