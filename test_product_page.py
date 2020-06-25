@@ -25,3 +25,29 @@ def test_guest_can_add_product_to_basket(browser: Union[webdriver.Chrome, webdri
     page.add_to_basket()
     page.basket_cost_should_be_equals_to(page.get_product_cost())
     page.product_added_to_basket_message_should_be_equals_to(page.get_product_name())
+
+
+def test_guest_cant_see_success_message(browser: Union[webdriver.Chrome, webdriver.Firefox]):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+    page = ProductPage(link, browser)
+    page.open()
+    page.should_not_be_success_message()
+
+
+@pytest.mark.xfail
+def test_guest_cant_see_success_message_after_adding_product_to_basket(
+        browser: Union[webdriver.Chrome, webdriver.Firefox]):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+    page = ProductPage(link, browser)
+    page.open()
+    page.add_to_basket()
+    page.should_not_be_success_message()
+
+
+@pytest.mark.xfail
+def test_message_disappeared_after_adding_product_to_basket(browser: Union[webdriver.Chrome, webdriver.Firefox]):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+    page = ProductPage(link, browser)
+    page.open()
+    page.add_to_basket()
+    page.success_message_should_disappear()
