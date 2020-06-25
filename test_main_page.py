@@ -22,10 +22,9 @@ def test_guest_can_go_to_login_page_from_main_page(browser: Union[webdriver.Chro
     login_page.should_be_login_page()
 
 
-@pytest.mark.dev
 def test_guest_cant_see_product_in_basket_opened_from_main_page(browser: Union[webdriver.Chrome, webdriver.Firefox]):
     page = MainPage("http://selenium1py.pythonanywhere.com/", browser)
-    page.open() 
+    page.open()
     page.go_to_basket_page()
     basket_page = BasketPage(browser.current_url, browser)
     basket_page.should_be_basket()

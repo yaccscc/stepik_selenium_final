@@ -7,6 +7,7 @@ from selenium import webdriver
 from .pages.product_page import ProductPage
 from .pages.login_page import LoginPage
 from .pages.basket_page import BasketPage
+from .pages.main_page import MainPage
 
 
 @pytest.mark.long
@@ -81,3 +82,28 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser: Unio
     basket_page.should_be_basket()
     basket_page.should_not_be_basket_items()
     basket_page.should_be_empty_basket_message()
+
+
+class TestUserAddToBasketFromProductPage:
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser: Union[webdriver.Chrome, webdriver.Firefox]):
+        main_page = MainPage("http://selenium1py.pythonanywhere.com/", browser)
+        main_page.open()
+        main_page.go_to_login_page()
+        login_page = LoginPage(browser.current_url, browser)
+        login_page.register_new_user(str(time.time()) + "@yaccscc.ru", "stepikstepik")
+        login_page.should_be_authorized_user()
+
+    def test_user_can_add_product_to_basket(self, browser: Union[webdriver.Chrome, webdriver.Firefox]):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+        page = ProductPage(link, browser)
+        page.open()
+        page.add_to_basket()
+        page.basket_cost_should_be_equals_to(page.get_product_cost())
+        page.product_added_to_basket_message_should_be_equals_to(page.get_product_name())
+
+    def test_user_cant_see_success_message(self, browser: Union[webdriver.Chrome, webdriver.Firefox]):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+        page = ProductPage(link, browser)
+        page.open()
+        page.should_not_be_success_message()
