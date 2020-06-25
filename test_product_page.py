@@ -56,14 +56,14 @@ def test_message_disappeared_after_adding_product_to_basket(browser: Union[webdr
     page.success_message_should_disappear()
 
 
-def test_guest_should_see_login_link(browser: Union[webdriver.Chrome, webdriver.Firefox]):
+def test_guest_should_see_login_link_from_product_page(browser: Union[webdriver.Chrome, webdriver.Firefox]):
     link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
     page = ProductPage(link, browser)
     page.open()
     page.should_be_login_link()
 
 
-def test_guest_can_go_to_login_page(browser: Union[webdriver.Chrome, webdriver.Firefox]):
+def test_guest_can_go_to_login_page_from_product_page(browser: Union[webdriver.Chrome, webdriver.Firefox]):
     link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
     page = ProductPage(link, browser)
     page.open()
